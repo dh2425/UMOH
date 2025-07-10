@@ -114,8 +114,8 @@ class MGSAL:
         self.best_epoch = 0
         self.K=False
         self.cra=False
-        self.global_step_losses = []  # 保存所有epoch的step loss
-        self.global_step_counts = []  # 全局step计数（跨epoch）
+        self.global_step_losses = [] 
+        self.global_step_counts = [] 
         self.iter = 0
     def load_checkpoints(self):
         self.model.load_state_dict(torch.load("path/model.pth", map_location=f"cuda:{self.opt.device}"))
@@ -208,7 +208,7 @@ class MGSAL:
                 self.eval(epoch)
 
     def save_loss_realtime(self, save_path="log/loss_log.txt"):
-        # 每次记录时追加写入文件
+     
         with open(save_path, 'a') as f:
             f.write(f"{len(self.global_step_losses)},{self.global_step_losses[-1]}\n")
 
@@ -298,7 +298,7 @@ class MGSAL:
 
     def weighted_mse_loss(self,H, S, weight,w_0):
         weight_S = weight.unsqueeze(1) * weight.unsqueeze(0)  # (bs, bs)
-        temperature = 1.0  # 可调整
+        temperature = 1.0 
         W_softmax = torch.softmax(weight_S / temperature, dim=-1)
 
         W_weight = W_softmax * W_softmax.size(0)
@@ -306,7 +306,7 @@ class MGSAL:
         weight_matrix=weight_matrix.detach()
 
         weighted_loss1 =(H - S.detach()).pow(2) * weight_matrix # (bs, bs)
-        valid_loss1 = weighted_loss1.sum() / (weight_matrix.sum())  # 归一化
+        valid_loss1 = weighted_loss1.sum() / (weight_matrix.sum())  
         valid_loss2 = (H- S).pow(2).mean()
 
         valid_loss=valid_loss1*0.1+valid_loss2*0.9
