@@ -3,9 +3,8 @@ from train import MGSAL
 def get_argument_parser():
 
     parser = argparse.ArgumentParser(description='Ours')
-    # /data/s2023028006/data/hashing/dataset
-    # D:\ProgramingFiles\python\Cross - Modal Hashing\MITH - main\dataset
-    parser.add_argument('--dataset_root_path', default=r"D:\Users\24226\Desktop\papper\2\program\NEW\MLRH-3\dataset", type=str, help='')
+
+    parser.add_argument('--dataset_root_path', default=r"\dataset", type=str, help='')
     parser.add_argument('--dataset', default="flickr25k", type=str, help='')
     parser.add_argument('--batch_size', default=64, type=int, help='Size of a training mini-batch.')
     parser.add_argument("--k_bits", type=int, default=32, help="length of hash codes.")
