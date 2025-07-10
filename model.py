@@ -292,9 +292,9 @@ def gc2(emb, k):
     if k > S.size(0):
         k = S.size(0)
     topk_values, topk_indices = torch.topk(S, k, dim=1)
-    # 创建一个全零张量
+
     result = torch.zeros_like(S)
-    # 将每行的最大 k 个元素填充到对应位置
+ 
     result.scatter_(1, topk_indices, topk_values)
 
     mask = 1 - torch.eye(S.size(0)).to(S.device)
